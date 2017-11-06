@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>NEO4J CONNECT</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bundle.css">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+    <article class="jumbotron">
+      <h1 class="display-3">NEO4J web applications</h1>
+      <p class="lead">This is a simple set of examples I have learnt to connect the neo4j graph database to websites</p>
+    </article>
+    <main>
+      <section class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Employees Example</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-7">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Departments</h4>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Add Department</h4>
+                <form id="addDepartment" name="addDepartment">
+                  <div class="form-group">
+                    <label for="department">Name</label>
+                    <input type="department" class="form-control" id="d_name" name="name" placeholder="Enter department name">
+                  </div>
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="d_desc" name="desc" rows="3"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Add Department</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="js/bundle.min.js"></script>
+  </body>
+</html>
