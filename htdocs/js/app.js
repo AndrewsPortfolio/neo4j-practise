@@ -3,15 +3,27 @@ var driver = neo4j.v1.driver("bolt://127.0.0.1:7687", authToken, {encrypted:fals
 
 var session = driver.session();
 
-
 $( "#addDepartment" ).submit(function( e ) {
   e.preventDefault();
   var form = document.getElementById('addDepartment'), formData = new FormData(form);
-  var label = "Department";
-  var statment = "MERGE (a:" + label + "{name:{d_name},description:{d_desc}})";
+  var label = ":Department";
   var parameters = {"d_name":formData.get('name'),"d_desc":formData.get('desc')}
+  var statment = createStatement(label, "name:{d_name},description:{d_desc}");
   runDB(statment, parameters);
 });
+
+$( "#addEmployee" ).submit(function( e ) {
+  e.preventDefault();
+  var form = document.getElementById('addEmployee'), formData = new FormData(form);
+  var label = ":Employee";
+  var parameters = {"e_fname":formData.get('firstName'),"e_surename":formData.get('surename'), "e_jobTitle":formData.get('jobTitle')}
+  var statment = createStatement(label, "first_name:{e_fname},surename:{e_surename},job_title:{e_jobTitle}");
+  runDB(statment, parameters);
+});
+
+function createStatement(label, properties){
+  return "MERGE (a " + label + " {" + properties + "})";
+}
 
 function runDB(statement, parameters){
   session.run(statement, parameters).subscribe({
@@ -20,6 +32,7 @@ function runDB(statement, parameters){
       },
       onCompleted: function(metadata) {
         console.log('onCompleted function');
+        console.log('record added');
       }
   });
 }
