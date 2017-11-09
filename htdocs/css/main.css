@@ -5,3 +5,7 @@ section.card{
 main{
   margin: 5vh 0;
 }
+
+.hidden{
+  display: none;
+}

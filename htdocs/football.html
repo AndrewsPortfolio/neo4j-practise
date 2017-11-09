@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>NEO4J CONNECT</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/bundle.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+  <article class="jumbotron">
+    <h1 class="display-3">NEO4J web applications</h1>
+    <p class="lead">This is a simple set of examples I have learnt to connect the neo4j graph database to websites</p>
+  </article>
+  <main>
+    <section class="container card">
+      <div class="row">
+        <div class="col-12">
+          <div class="card-body">
+            <h4 class="card-title">Matches</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7">
+            <div class="card-body">
+              <h4 class="card-title">Matches</h4>
+              <table id="depTable" class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card-body">
+              <h4 class="card-title">Add Match</h4>
+              <form id="addMatch" name="addMatch">
+                <div class="form-group">
+                  <label for="m_date">Date</label>
+                  <input class="form-control" type="date" value="2017-00-11" id="m_date" name="m_date">
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-8">
+                      <label for="team_1">Home Team</label>
+                      <select class="form-control" id="h_team" name="h_team">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                      </select>
+                      <input class="hidden" type="text" id="m_loc" name="m_loc">
+                    </div>
+                    <div class="col">
+                      <label for="team_1">Home Score</label>
+                      <input class="form-control" type="number" value="2" id="h_score" name="h_score">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-8">
+                      <label for="team_1">Away Team</label>
+                      <select class="form-control" id="a_team" name="a_team">
+                        <option>1</option>
+                      </select>
+                    </div>
+                    <div class="col">
+                      <label for="team_1">Away Score</label>
+                      <input class="form-control" type="number" value="2" id="a_score" name="a_score">
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Match</button>
+              </form>
+            </div>
+        </div>
+      </div>
+    </section>
+    <section class="container card">
+      <div class="row">
+        <div class="col-7">
+            <div class="card-body">
+              <h4 class="card-title">Teams</h4>
+              <table id="teamTable" class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card-body">
+              <h4 class="card-title">Add Team</h4>
+              <form id="addEmployee" name="addEmployee">
+                <div class="form-group">
+                  <label for="f_name">First Name</label>
+                  <input type="text" class="form-control" id="e_fname" name="firstName" placeholder="Enter firstname">
+                </div>
+                <div class="form-group">
+                  <label for="f_name">Surename</label>
+                  <input type="text" class="form-control" id="e_surename" name="surename" placeholder="Enter surename">
+                </div>
+                <div class="form-group">
+                  <label for="f_name">Job Title</label>
+                  <input type="text" class="form-control" id="e_jobTitle" name="jobTitle" placeholder="Enter job title">
+                </div>
+                <button type="submit" class="btn btn-primary">Add Employee</button>
+              </form>
+            </div>
+        </div>
+      </div>
+    </section>
+    <section class="container card">
+      <div class="row">
+        <div class="col-12">
+          <div class="card-body">
+            <form id="customStatement" name="customStatement">
+              <div class="form-group">
+                <label for="text">statement</label>
+                <textarea class="form-control" id="c_statement" name="statement" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Run statement</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="js/bundle.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/football.js"></script>
+</body>
+</html>

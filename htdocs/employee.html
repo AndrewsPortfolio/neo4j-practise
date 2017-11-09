@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>NEO4J CONNECT</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/bundle.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+  <article class="jumbotron">
+    <h1 class="display-3">NEO4J web applications</h1>
+    <p class="lead">This is a simple set of examples I have learnt to connect the neo4j graph database to websites</p>
+  </article>
+  <main>
+    <section class="container card">
+      <div class="row">
+        <div class="col-12">
+          <div class="card-body">
+            <h4 class="card-title">Employees Example</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7">
+            <div class="card-body">
+              <h4 class="card-title">Departments</h4>
+              <table id="depTable" class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card-body">
+              <h4 class="card-title">Add Department</h4>
+              <form id="addDepartment" name="addDepartment">
+                <div class="form-group">
+                  <label for="department">Name</label>
+                  <input type="text" class="form-control" id="d_name" name="name" placeholder="Enter department name">
+                </div>
+                <div class="form-group">
+                  <label for="text">Description</label>
+                  <textarea class="form-control" id="d_desc" name="desc" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Department</button>
+              </form>
+            </div>
+        </div>
+      </div>
+    </section>
+    <section class="container card">
+      <div class="row">
+        <div class="col-7">
+            <div class="card-body">
+              <h4 class="card-title">Employees</h4>
+              <table id="empTable" class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>job title</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card-body">
+              <h4 class="card-title">Add Employee</h4>
+              <form id="addEmployee" name="addEmployee">
+                <div class="form-group">
+                  <label for="f_name">First Name</label>
+                  <input type="text" class="form-control" id="e_fname" name="firstName" placeholder="Enter firstname">
+                </div>
+                <div class="form-group">
+                  <label for="f_name">Surename</label>
+                  <input type="text" class="form-control" id="e_surename" name="surename" placeholder="Enter surename">
+                </div>
+                <div class="form-group">
+                  <label for="f_name">Job Title</label>
+                  <input type="text" class="form-control" id="e_jobTitle" name="jobTitle" placeholder="Enter job title">
+                </div>
+                <button type="submit" class="btn btn-primary">Add Employee</button>
+              </form>
+            </div>
+        </div>
+      </div>
+    </section>
+    <section class="container card">
+      <div class="row">
+        <div class="col-12">
+          <div class="card-body">
+            <form id="customStatement" name="customStatement">
+              <div class="form-group">
+                <label for="text">statement</label>
+                <textarea class="form-control" id="c_statement" name="statement" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Run statement</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="js/bundle.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/employee.js"></script>
+</body>
+</html>

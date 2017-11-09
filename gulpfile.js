@@ -2,7 +2,6 @@ var gulp = require('gulp'), minify = require('gulp-minify'), watch = require('gu
 
 var jsLoc = './htdocs/js/';
 var cssLoc = './htdocs/css/';
-
 var scssLoc = './scss/*.scss';
 
 var jsFiles = [
