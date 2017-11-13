@@ -3,17 +3,18 @@ var matchProps = ['date', 'location'];
 
 $("#addTeam").submit(function(e) {
   e.preventDefault();
-  var form = $('#addDepartment')[0],
+  var form = $('#addTeam')[0],
     formData = new FormData(form);
-  var label = ":Department";
-  var parameters = {
-    "t_name": formData.get('name')
-  }
+  var label = ":Team";
+  var parameters = {"t_name": formData.get('name')};
   var statement = mergeStatement(label, "name:{t_name}");
+
   session.run(statement, parameters).subscribe({
     onCompleted: function(metadata) {
       $('#addTeam').trigger("reset");
-      // updateLabelTable('depTable','Department',depProps);
+      updateLabelTable('teamTable','Team',teamProps);
+      updateSelect('h_team','Team','name');
+      updateSelect('a_team','Team','name');
     }
   });
 });
@@ -40,7 +41,7 @@ $("#addMatch").submit(function(e) {
     onCompleted: function(metadata) {
       $('#addMatch').trigger("reset");
       console.log(metadata);
-      //updateLabelTable('matchTable','Match',matchProps);
+      // updateLabelTable('matchTable','Match',matchProps);
     }
   });
 });
@@ -54,6 +55,8 @@ $(document).ready(function() {
 
   updateSelect('h_team','Team','name');
   updateSelect('a_team','Team','name');
-  //updateLabelTable('depTable','Department',depProps);
+  updateLabelTable('teamTable','Team',teamProps);
   //updateLabelTable('empTable','Employee',empProps);
+
+  updateMatchTable("matchTable", "Match");
 });

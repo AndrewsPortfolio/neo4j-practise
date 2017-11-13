@@ -27,12 +27,15 @@
         <div class="col-7">
             <div class="card-body">
               <h4 class="card-title">Matches</h4>
-              <table id="depTable" class="table">
+              <table id="matchTable" class="table">
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>description</th>
+                    <th>date</th>
+                    <th>away team</th>
+                    <th>away score</th>
+                    <th>home team</th>
+                    <th>home score</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -105,20 +108,12 @@
         <div class="col">
             <div class="card-body">
               <h4 class="card-title">Add Team</h4>
-              <form id="addEmployee" name="addEmployee">
+              <form id="addTeam" name="addTeam">
                 <div class="form-group">
-                  <label for="f_name">First Name</label>
-                  <input type="text" class="form-control" id="e_fname" name="firstName" placeholder="Enter firstname">
+                  <label for="t_name">Team name</label>
+                  <input type="text" class="form-control" id="t_name" name="name" placeholder="Enter team name">
                 </div>
-                <div class="form-group">
-                  <label for="f_name">Surename</label>
-                  <input type="text" class="form-control" id="e_surename" name="surename" placeholder="Enter surename">
-                </div>
-                <div class="form-group">
-                  <label for="f_name">Job Title</label>
-                  <input type="text" class="form-control" id="e_jobTitle" name="jobTitle" placeholder="Enter job title">
-                </div>
-                <button type="submit" class="btn btn-primary">Add Employee</button>
+                <button type="submit" class="btn btn-primary">Add Team</button>
               </form>
             </div>
         </div>

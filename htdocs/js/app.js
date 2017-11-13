@@ -26,7 +26,7 @@ $("#customStatement").submit(function(e) {
 });
 
 function mergeStatement(label, properties) {
-  return "MERGE (a " + label + " {" + properties + "})";
+  return "MERGE (a" + label + " {" + properties + "})";
 }
 
 function matchStatement(label) {
@@ -51,6 +51,27 @@ function updateLabelTable(table, label, collumns) {
   });
 }
 
+function updateMatchTable(table, label) {
+  $("#" + table + " tr").remove();
+  // var statement = "MATCH (m:Match)<-[r:PLAYED]-(t:Team) return distinct m, r, t";
+  // var statement = "MATCH (m:Match)<-[r:PLAYED]-(t:Team) return distinct ID(m), m.date, r.score,t.name;";
+  var statement = "MATCH p=(m:Match)<-[r:PLAYED]-(t:Team) return distinct p;";
+
+  var matches = [];
+  session.run(statement).subscribe({
+    onNext: function(record) {
+      // console.log(record);
+      record.forEach(function(value, index) {
+        console.log(value);
+
+      });
+    },
+    onCompleted: function(metadata) {
+      // console.log(metadata);
+    }
+  });
+}
+
 function updateSelect(select, label, text) {
   $("#" + select + " option").remove();
   var statement = matchStatement(":" + label + "");
@@ -62,6 +83,15 @@ function updateSelect(select, label, text) {
       });
     },
   });
+}
+
+function isItemInArray(array, item, cell) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[''+ cell +''][i][0] == item) {
+            return true;
+        }
+    }
+    return false;
 }
 
 $(document).ready(function() {
