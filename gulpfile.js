@@ -1,15 +1,18 @@
-var gulp = require('gulp'), minify = require('gulp-minify'), watch = require('gulp-watch'), sass = require('gulp-sass') ,concat = require('gulp-concat');
+var gulp = require('gulp'), minify = require('gulp-minify'), watch = require('gulp-watch'), sass = require('gulp-sass') ,concat = require('gulp-concat'), cleanCSS = require('gulp-clean-css');
 
 var jsLoc = './htdocs/js/';
 var cssLoc = './htdocs/css/';
 var scssLoc = './scss/*.scss';
 
 var jsFiles = [
-  './node_modules/neo4j-driver/lib/browser/neo4j-web.min.js',
   './node_modules/jquery/dist/jquery.min.js',
+  './node_modules/neo4j-driver/lib/browser/neo4j-web.min.js',
   './node_modules/popper.js/dist/umd/popper.min.js',
   './node_modules/bootstrap/dist/js/bootstrap.min.js',
-  // './htdocs/js/app.js'
+  jsLoc + 'functions.js',
+  jsLoc + 'forms.js',
+  jsLoc + 'app.js'
+
 ];
 
 var scssFiles = [
@@ -26,9 +29,8 @@ gulp.task('compilejs', function () {
 gulp.task('compilecss', function () {
    return gulp.src(scssFiles)
    .pipe(sass())
-   .pipe(concat('bundle.css'))
-  //  .pipe(cleanCSS())
-  //  .pipe(concat('bundle.min.css'))
+   .pipe(cleanCSS())
+   .pipe(concat('bundle.min.css'))
    .pipe(gulp.dest(cssLoc))
 });
 
