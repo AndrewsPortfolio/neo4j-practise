@@ -1,43 +1,33 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <title>NEO4J CONNECT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="css/bundle.min.css">
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="./css/bundle.min.css">
 </head>
-
 <body>
-  <article class="jumbotron">
-    <h1 class="display-3">NEO4J web applications</h1>
-    <p class="lead">This is a simple set of examples I have learnt to connect the neo4j graph database to websites</p>
-  </article>
-  <main class="container">
-    <section class="row">
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-block">
-            <h4 class="card-title">Employee Example</h4>
-            <h6 class="card-subtitle mb-2 text-muted">employees and departments</h6>
-            <p class="card-text">this example is a employee and department graph database.</p>
-            <a href="employee.html" class="card-link">Example</a>
-          </div>
+  <link rel="import" class="nav" href="./inc/nav.html">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+  <main class="fluid-container">
+    <section class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <div class="row">
+          <h1 class="display-3">Fluid jumbotron</h1>
+          <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
         </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-block">
-            <h4 class="card-title">Football Example</h4>
-            <h6 class="card-subtitle mb-2 text-muted">football teams and matches</h6>
-            <p class="card-text">this example is a football and matches graph database.</p>
-            <a href="football.html" class="card-link">Example</a>
+        <div class="row">
+          <div class="col">
+          </div>
+          <div class="col">
+          </div>
+          <div class="col">
           </div>
         </div>
       </div>
     </section>
   </main>
   <script src="js/bundle.min.js"></script>
+  <script>templateImport('nav', 'nav');</script>
 </body>
 </html>
