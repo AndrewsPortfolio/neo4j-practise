@@ -1,9 +1,9 @@
 
 //local
-// const username = 'neo4j', password = 'neo4j', url = 'bolt://127.0.0.1:7687';
+const username = 'neo4j', password = 'neo4j', url = 'bolt://127.0.0.1:7687';
 
 //remote
-var username = 'webConnect', password = 'b.ryA4HdyLygdx.QaFLplpKB3qWDWkX', url = 'bolt://hobby-kmoladampbiogbkelgkfagal.dbs.graphenedb.com:24786';
+// var username = 'webConnect', password = 'b.ryA4HdyLygdx.QaFLplpKB3qWDWkX', url = 'bolt://hobby-kmoladampbiogbkelgkfagal.dbs.graphenedb.com:24786';
 var driver = neo4j.v1.driver(url, neo4j.v1.auth.basic(username, password));
 var session = driver.session();
 
