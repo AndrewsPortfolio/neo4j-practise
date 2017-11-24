@@ -1,14 +1,8 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <title>NEO4J CONNECT</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="./css/bundle.min.css">
-</head>
+<?php require 'inc/head.php';?>
 <body>
-  <link rel="import" class="nav" href="./inc/nav.html">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+  <?php require 'inc/nav.php';?>
   <main class="fluid-container">
     <section class="jumbotron jumbotron-fluid">
       <div class="container">
@@ -18,6 +12,7 @@
         </div>
         <div class="row">
           <div class="col">
+            <iframe src="192.168.0.1:1337/addemployee"></iframe>
           </div>
           <div class="col">
           </div>
@@ -27,7 +22,7 @@
       </div>
     </section>
   </main>
-  <script src="js/bundle.min.js"></script>
-  <script>templateImport('nav', 'nav');</script>
+  <?php require 'inc/footer.php';?>
+  <?php require 'inc/scripts.php';?>
 </body>
 </html>

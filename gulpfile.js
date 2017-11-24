@@ -45,12 +45,11 @@ gulp.task('compilecss', function () {
    .pipe(gulp.dest(cssLoc))
    .pipe(cleanCSS())
    .pipe(rename('bundle.min.css'))
-
    .pipe(gulp.dest(cssLoc))
 });
 
 gulp.task('js_watch', function () {
-    gulp.watch(jsLoc + 'app.js', ['compilejs']);
+    gulp.watch(jsFiles, ['compilejs']);
 });
 
 gulp.task('css_watch', function () {
