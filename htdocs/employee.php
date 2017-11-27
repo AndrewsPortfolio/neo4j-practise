@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="en">
+<html>
 <?php require 'inc/head.php';?>
-<body>
+<body >
   <?php require 'inc/nav.php';?>
   <main class="fluid-container">
     <section class="jumbotron jumbotron-fluid">
@@ -22,9 +22,9 @@
         </div>
       </div>
     </section>
+    <?php require 'inc/employee/modals.php';?>
   </main>
   <?php require 'inc/footer.php';?>
-  <?php require 'inc/employee/modals.php';?>
   <?php require 'inc/scripts.php';?>
 </body>
 </html>

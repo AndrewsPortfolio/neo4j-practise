@@ -1,5 +1,3 @@
-//---------FUNCTIONS---------//
-
 //---------VARIABLES---------//
 var showDebug = true;
 
@@ -13,8 +11,12 @@ var codes = {
 var server = {
   'protocol' : 'http://',
   'ip' : '127.0.0.1',
-  'port' : '8080'
+  'port' : '1337'
 }
+
+var departments, employees;
+
+//---------FUNCTIONS---------//
 
 //---------DEBUG LOGGING---------//
 function logDebug(type, text){if(showDebug){console.log(type + ' : ' + text);}}
@@ -23,7 +25,6 @@ function logDebug(type, text){if(showDebug){console.log(type + ' : ' + text);}}
 function submitForm(data, page){
   var loc = createUrl(page);
   $.post( loc, data).done(function( data ) {
-    console.log(data);
     switch (data) {
       case codes.success:
         alert('record added');
@@ -48,10 +49,9 @@ function submitForm(data, page){
 }
 
 //---------GET DATA---------//
-function getData(page){
+function getData(page, type, data, trigger){
   var loc = createUrl(page);
-  $.post( loc, data).done(function( data ) {
-    console.log(data);
+  $.get( loc, data).done(function( data ) {
     switch (data) {
       case codes.inputError:
         alert('there was an input error');
@@ -63,12 +63,18 @@ function getData(page){
         alert('there was an unkown error');
         break;
       default:
-        console.log(data);
+      $(document).trigger('' + trigger + '', [data]);
+      return data;
     }
   }).fail(function(error) {
     alert('there was a url error');
     console.log("error");
   });
+}
+
+//---------EXTRACT DATA---------//
+function extractData(data){
+  props = data._fields;
 }
 
 

@@ -32,6 +32,14 @@
         </div>
         <div class="row form-group">
           <div class="col">
+            <label for="e_dep">Department</label>
+            <select id="e_dep" name="department">
+                <option v-for="dep in departments.properties" :value="dep.name">{{dep.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col">
             <small id="manager" class="form-text text-muted float-right">Assign manager ?</small>
           </div>
         </div>

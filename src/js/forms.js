@@ -1,3 +1,4 @@
+//---------ADD EMPLOYEE---------//
 $("#addEmployeeForm").submit(function(e){
   e.preventDefault();
   var form = document.getElementById("addEmployeeForm");
@@ -5,6 +6,7 @@ $("#addEmployeeForm").submit(function(e){
   submitForm(formToArray(data), 'addEmployee');
 });
 
+//---------ADD DEPARTMENT---------//
 $("#addDepartmentForm").submit(function(e){
   e.preventDefault();
   var form = document.getElementById("addDepartmentForm");
