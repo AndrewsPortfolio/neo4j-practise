@@ -2,43 +2,84 @@
 
 //---------VARIABLES---------//
 var showDebug = true;
-var codes = {db_error: 1, data_error: 2, success: 3, failed: 4};
 
-var server = {'ip' : '192.168.0.1','port' : 1337}
+var codes = {
+  'success' : 1,
+  'dbError' : 2,
+  'inputError' : 3,
+  'unknown' : 4
+}
+
+var server = {
+  'protocol' : 'http://',
+  'ip' : '127.0.0.1',
+  'port' : '8080'
+}
 
 //---------DEBUG LOGGING---------//
 function logDebug(type, text){if(showDebug){console.log(type + ' : ' + text);}}
 
 //---------SUBMITTING FORMS---------//
-function submitForm(form, data, page, modal){
-  logDebug('Function', 'submitForm');
-  var loc = (server.ip + ":" + server.port + "/" + page);
-  logDebug('data', loc);
-  $.ajax({type: "POST", url : loc, data: JSON.stringify(data), cache : false, processData: false})
-  .done(function(){
-    alert("Success.");
-  }).fail(function(){
-    alert("Sorry. Server unavailable.");
+function submitForm(data, page){
+  var loc = createUrl(page);
+  $.post( loc, data).done(function( data ) {
+    console.log(data);
+    switch (data) {
+      case codes.success:
+        alert('record added');
+        $('#' + page + 'Form')[0].reset();
+        $('#' + page).modal('hide');
+        break;
+      case codes.inputError:
+        alert('there was an input error');
+        break;
+      case codes.dbError:
+        alert('there was an database error');
+        break;
+      case codes.unknown:
+        alert('there was an unkown error');
+        break;
+      default:
+    }
+  }).fail(function(error) {
+    alert('there was a url error');
+    console.log("error");
   });
 }
 
-//---------CHARACTER COUNT---------//
-function charCount(value, count, div){
-  logDebug('Function', 'charCount');
-  var length = $(value).val().length;
-  var remaining = count - length;
-  if(remaining <= (count / 5)){$(div).html(remaining + ' characters remaining');}
-  else{  $(div).html('');}
+//---------GET DATA---------//
+function getData(page){
+  var loc = createUrl(page);
+  $.post( loc, data).done(function( data ) {
+    console.log(data);
+    switch (data) {
+      case codes.inputError:
+        alert('there was an input error');
+        break;
+      case codes.dbError:
+        alert('there was an database error');
+        break;
+      case codes.unknown:
+        alert('there was an unkown error');
+        break;
+      default:
+        console.log(data);
+    }
+  }).fail(function(error) {
+    alert('there was a url error');
+    console.log("error");
+  });
 }
 
-//---------SHOW ERROR---------//
-function messageError(form, message, text){
-  $(form).addClass("is-invalid").removeClass("is-valid");
-  $(message).addClass("invalid-feedback").removeClass("valid-feedback").html(text);
+
+//---------CREATE URL---------//
+function createUrl(page){
+  return (server.protocol + server.ip + ":" + server.port + "/" + page);
 }
 
-//---------SHOW SUCCESS---------//
-function messageSuccess(form, message, text){
-  $(form).addClass("is-valid").removeClass("is-invalid");
-  $(message).addClass("valid-feedback").removeClass("invalid-feedback").html(text);
+//---------CONVERT FORM OBJECT TO ARRAY---------//
+function formToArray(form){
+    var arr = {};
+    for(var pair of form.entries()) {arr[pair[0]] = pair[1];}
+    return arr;
 }

@@ -17,7 +17,7 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEmployee">Add Employee</button>
           </div>
           <div class="col">
-
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDepartment">Add Department</button>
           </div>
         </div>
       </div>
