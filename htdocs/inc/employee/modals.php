@@ -34,8 +34,7 @@
           <div class="col">
             <label for="e_dep">Department</label>
             <select class="dep_select form-control" name="department">
-                <option v-for="dep in departments">{{dep.name}}</option>
-                <!-- <dep-option v-for="dep in departments" v-bind:dep="dep"></dep-option> -->
+              <option v-for="dep in departments">{{dep.name}}</option>
             </select>
           </div>
         </div>
@@ -72,6 +71,54 @@
           <div class="col">
             <label for="d_desc">Description</label>
             <textarea id="d_desc" name="description" type="text" class="form-control" ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary">Add Department</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="AssignDepartment" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <form id="AssignDepartment" name="AssignDepartment" v-on:submit.prevent="addDepartment" enctype="multipart/form-data" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Assign Department</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row form-group">
+          <div class="col-6">
+            <label for="e_firstName">First Name</label>
+            <input  v-model="assignDep.employee.first_name" id="e_firstName" name="first_name" type="text" class="form-control" placeholder="First Name" readonly>
+          </div>
+          <div class="col-6">
+            <label for="e_surename">Surename</label>
+            <input v-model="assignDep.employee.surename" id="e_surename" name="surename" type="text" class="form-control" placeholder="Surename" readonly>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col">
+            <label for="e_email">Email</label>
+            <input v-model="assignDep.employee.email" id="e_email" name="email" type="email" class="form-control" placeholder="email" readonly>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col">
+            <label for="e_dep">Department</label>
+            <select v-model="assignDep.department" class="dep_select form-control" name="department">
+              <option v-for="dep in departments">{{dep.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col">
+            <label for="d_desc">Description</label>
+            <p>{{assignDep.department.description}}</p>
           </div>
         </div>
       </div>

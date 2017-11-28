@@ -1,15 +1,8 @@
 
-Vue.component('depOption', {
-  props: ['dep'],
-  template: '<option>{{ dep.name }}</option>'
-})
-
 Vue.component('dep-option', {
-  props: ['dep'],
-  template: '<option>{{ dep.name }}</option>'
+  template: '<option>{{ dep.name }}</option>',
+  props: ['dep']
 })
-
-
 
 var app = new Vue({
   el : '#e_controller',
@@ -17,6 +10,18 @@ var app = new Vue({
     test : "this is a test",
     departments: [],
     employees: [],
+    assignDep : {
+      "employee" : {
+        'first_name' : "",
+        'surename' : "",
+        'email' : "",
+        'job_title' : ""
+      },
+      "department" : {
+        'name' : "",
+        'description' : ""
+      }
+    }
   },
   created : function(){
     this.getDepartments();
@@ -35,8 +40,8 @@ var app = new Vue({
       var data = {"name" : form.target.elements.name.value, "description" : form.target.elements.description.value};
       this.$http.post(createUrl('addDepartment'), data).then(response => {
         if(errorCheck(response)){
-          // this.departments.push(data);
-          this.departments.$set(data);
+          this.departments.push(data);
+          form.target.reset();
         }else{console.log('data error : ' + response);}
       }, response => {}).bind(this);
     },
