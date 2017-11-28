@@ -6,7 +6,11 @@
   },
   "src" : {
     "loc" : "./src",
-    "js":["./src/js/*.js"],
+    "js":[
+      "./src/js/functions.js",
+      "./src/js/forms.js",
+      "./src/js/app.js"
+    ],
     "css":["./src/scss/*.scss"]
   },
   "pkgs" :{

@@ -73,10 +73,23 @@ function getData(page, type, data, trigger){
 }
 
 //---------EXTRACT DATA---------//
-function extractData(data){
-  props = data._fields;
+function extractSingleDataVue(data){
+  arr = [];
+  data.forEach(function(i) {
+    arr.push(i._fields[0].properties);
+  });
+  return arr;
 }
 
+//---------CHECK DATA---------//
+function errorCheck(error){
+  switch (error) {
+    case error.success: return true; break;
+    case error.dbError: return false; break;
+    case error.inputError: return false; break;
+    default: return true;
+  }
+}
 
 //---------CREATE URL---------//
 function createUrl(page){

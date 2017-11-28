@@ -1,40 +1,3 @@
-
-var departments = new Vue({
-  el : '#e_dep',
-  data : {
-    departments: [],
-  },
-  created : function(){
-    this.getDepartments();
-  },
-  methods : {
-    getDepartments: function(){
-      this.$http.get(createUrl('departments')).then(response => {
-        this.departments = response.body;
-        console.log(this.departments);
-      }, response => {
-        //error
-      }).bind(this);
-    },
-  }
-});
-
-//---------ADD EMPLOYEE---------//
-$("#addEmployeeForm").submit(function(e){
-  e.preventDefault();
-  var form = document.getElementById("addEmployeeForm");
-  var data = new FormData(form);
-  submitForm(formToArray(data), 'addEmployee');
-});
-
-//---------ADD DEPARTMENT---------//
-$("#addDepartmentForm").submit(function(e){
-  e.preventDefault();
-  var form = document.getElementById("addDepartmentForm");
-  var data = new FormData(form);
-  submitForm(formToArray(data), 'addDepartment');
-});
-
 //---------VARIABLES---------//
 var showDebug = true;
 
@@ -110,10 +73,23 @@ function getData(page, type, data, trigger){
 }
 
 //---------EXTRACT DATA---------//
-function extractData(data){
-  props = data._fields;
+function extractSingleDataVue(data){
+  arr = [];
+  data.forEach(function(i) {
+    arr.push(i._fields[0].properties);
+  });
+  return arr;
 }
 
+//---------CHECK DATA---------//
+function errorCheck(error){
+  switch (error) {
+    case error.success: return true; break;
+    case error.dbError: return false; break;
+    case error.inputError: return false; break;
+    default: return true;
+  }
+}
 
 //---------CREATE URL---------//
 function createUrl(page){
@@ -126,3 +102,72 @@ function formToArray(form){
     for(var pair of form.entries()) {arr[pair[0]] = pair[1];}
     return arr;
 }
+
+// //---------ADD EMPLOYEE---------//
+// $("#addEmployeeForm").submit(function(e){
+//   e.preventDefault();
+//   var form = document.getElementById("addEmployeeForm");
+//   var data = new FormData(form);
+//   submitForm(formToArray(data), 'addEmployee');
+// });
+//
+// //---------ADD DEPARTMENT---------//
+// $("#addDepartmentForm").submit(function(e){
+//   e.preventDefault();
+//   var form = document.getElementById("addDepartmentForm");
+//   var data = new FormData(form);
+//   submitForm(formToArray(data), 'addDepartment');
+// });
+
+
+Vue.component('depOption', {
+  props: ['dep'],
+  template: '<option>{{ dep.name }}</option>'
+})
+
+Vue.component('dep-option', {
+  props: ['dep'],
+  template: '<option>{{ dep.name }}</option>'
+})
+
+
+
+var app = new Vue({
+  el : '#e_controller',
+  data : {
+    test : "this is a test",
+    departments: [],
+    employees: [],
+  },
+  created : function(){
+    this.getDepartments();
+    this.getEmployees();
+  },
+  methods : {
+    getDepartments: function(){
+      this.$http.get(createUrl('departments')).then(response => {
+        if(errorCheck(response)){
+          this.departments = extractSingleDataVue(response.body);
+        }else{console.log('data error : ' + response);}
+      }, response => {
+      }).bind(this);
+    },
+    addDepartment: function(form){
+      var data = {"name" : form.target.elements.name.value, "description" : form.target.elements.description.value};
+      this.$http.post(createUrl('addDepartment'), data).then(response => {
+        if(errorCheck(response)){
+          // this.departments.push(data);
+          this.departments.$set(data);
+        }else{console.log('data error : ' + response);}
+      }, response => {}).bind(this);
+    },
+    getEmployees: function(){
+      this.$http.get(createUrl('Employees')).then(response => {
+        if(errorCheck(response)){
+          this.employees = extractSingleDataVue(response.body);
+        }else{console.log('data error : ' + response);}
+      }, response => {
+      }).bind(this);
+    },
+  }
+});

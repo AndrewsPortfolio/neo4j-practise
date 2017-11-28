@@ -33,8 +33,9 @@
         <div class="row form-group">
           <div class="col">
             <label for="e_dep">Department</label>
-            <select id="e_dep" name="department">
-                <option v-for="dep in departments.properties" :value="dep.name">{{dep.name}}</option>
+            <select class="dep_select form-control" name="department">
+                <option v-for="dep in departments">{{dep.name}}</option>
+                <!-- <dep-option v-for="dep in departments" v-bind:dep="dep"></dep-option> -->
             </select>
           </div>
         </div>
@@ -53,7 +54,7 @@
 
 <div id="addDepartment" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <form id="addDepartmentForm" name="addDepartmentForm" enctype="multipart/form-data" class="modal-content">
+    <form id="addDepartmentForm" name="addDepartmentForm" v-on:submit.prevent="addDepartment" enctype="multipart/form-data" class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Add Department</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -64,7 +65,7 @@
         <div class="row form-group">
           <div class="col">
             <label for="d_name">Department Name</label>
-            <input  id="d_name" name="name" type="text" class="form-control" placeholder="Department Name">
+            <input id="d_name" name="name" type="text" class="form-control" placeholder="Department Name">
           </div>
         </div>
         <div class="row form-group">
@@ -75,7 +76,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Add Department</button>
+        <button class="btn btn-primary">Add Department</button>
       </div>
     </form>
   </div>

@@ -1,9 +1,9 @@
 <!doctype html>
 <html>
 <?php require 'inc/head.php';?>
-<body >
+<body class="">
   <?php require 'inc/nav.php';?>
-  <main class="fluid-container">
+  <main id="e_controller" class="fluid-container">
     <section class="jumbotron jumbotron-fluid">
       <div class="container">
         <div class="row">
@@ -19,6 +19,8 @@
           <div class="col">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDepartment">Add Department</button>
           </div>
+        </div>
+        <div class="row">
         </div>
       </div>
     </section>
