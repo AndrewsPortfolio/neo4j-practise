@@ -1,0 +1,23 @@
+{
+  "dist" : {
+    "loc" : "./htdocs",
+    "pkgs" : "packages",
+    "src" : "src"
+  },
+  "src" : {
+    "loc" : "./src",
+    "js":["./src/js/*.js"],
+    "css":["./src/scss/*.scss"]
+  },
+  "pkgs" :{
+    "js" : [
+      "./node_modules/jquery/dist/jquery.min.js",
+      "./node_modules/neo4j-driver/lib/browser/neo4j-web.min.js",
+      "./node_modules/popper.js/dist/umd/popper.min.js",
+      "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+    ],
+    "css": [
+      "./node_modules/bootstrap/scss/**/*.scss"
+    ]
+  }
+}
