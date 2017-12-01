@@ -8,7 +8,7 @@
     "loc" : "./src",
     "js":[
       "./src/js/functions.js",
-      "./src/js/forms.js",
+      "./src/js/models.js",
       "./src/js/app.js"
     ],
     "css":["./src/scss/*.scss"]

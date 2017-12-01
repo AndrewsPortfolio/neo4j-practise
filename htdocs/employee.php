@@ -25,6 +25,9 @@
     <section>
       <div class="container">
         <div class="row">
+          <div class="col">
+            <h1>Employees</h1>
+          </div>
           <table class="table">
             <thead>
               <tr>
@@ -38,8 +41,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="emp in employees">
-                <th scope="row">1</th>
+              <tr v-for="(emp, index) in employees">
+                <th scope="row">{{index}}</th>
                 <td>{{emp.first_name}}</td>
                 <td>{{emp.surename}}</td>
                 <td>{{emp.email}}</td>
@@ -52,6 +55,31 @@
                   <div v-if="emp.department">{{emp.department.name}}</div>
                   <div v-else><button  v-on:click="assignDep.employee = emp" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AssignDepartment">Assign Department</button></div>
                 </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1>Departments</h1>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Employee count</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(dep, index) in departments">
+                <th scope="row">{{index}}</th>
+                <td>{{dep.name}}</td>
+                <td>{{dep.description}}</td>
+                <td>n/a</td>
               </tr>
             </tbody>
           </table>

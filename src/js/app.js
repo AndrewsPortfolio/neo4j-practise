@@ -4,18 +4,8 @@ var app = new Vue({
     test : "this is a test",
     departments: [],
     employees: [],
-    assignDep : {
-      "employee" : {
-        'first_name' : "",
-        'surename' : "",
-        'email' : "",
-        'job_title' : ""
-      },
-      "department" : {
-        'name' : "",
-        'description' : ""
-      }
-    }
+    assignDep : {"employee":{'first_name':"",'surename':"",'email':"",'job_title':""},"department":{'name':"",'description':""}}
+
   },
   created : function(){
     this.getDepartments();
@@ -26,17 +16,17 @@ var app = new Vue({
     getDepartments: function(){
       this.$http.get(createUrl('departments')).then(response => {
         if(errorCheck(response)){
-          this.departments = extractSingleDataVue(response.body);
+          console.log(response.body);
+          this.departments = extractData(response.body, null);
+          console.log(this.departments);
         }else{console.log('data error : ' + response);}
       }, response => {
       }).bind(this);
     },
     getEmployees: function(){
       this.$http.get(createUrl('Employees')).then(response => {
-        console.log(response.body);
-        console.log(extractEmployee(response.body));
         if(errorCheck(response)){
-          // this.employees = extractSingleDataVue(response.body);
+          this.employees = extractData(response.body, this.empExtras);
         }else{console.log('data error : ' + response);}
       }, response => {
       }).bind(this);
@@ -52,19 +42,12 @@ var app = new Vue({
       }, response => {}).bind(this);
     },
     addEmployee: function(form){
-      var data = {
-        "first_name" : form.target.elements.first_name.value,
-        "surename" : form.target.elements.surename.value,
-        "email" : form.target.elements.email.value,
-        "job_title" : form.target.elements.job_title.value,
-        // "department" : form.target.elements.department.value
-        "department" : searchData(form.target.elements.department.value, 'name', this.departments)
-
-      };
+      var data = formToObj(form.target.elements, this.employeeModel);
+      data.department = searchData(form.target.elements.department.value, 'name', this.departments);
       this.$http.post(createUrl('addEmployee'), data).then(response => {
         if(errorCheck(response)){
           this.employees.push(data);
-          // form.target.reset();
+          form.target.reset();
         }else{console.log('data error : ' + response);}
       }, response => {}).bind(this);
     },

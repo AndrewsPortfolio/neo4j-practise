@@ -30,13 +30,18 @@ function extractSingleDataVue(data){
   return arr;
 }
 
-function extractEmployee(data){
-  arr = [];
-  data.forEach(function(i) {
+function extractData(data, extra = null){
+  var arr = [];
+  data.forEach(function(data, index) {
     var obj = {};
-    if(i._fields[0].label == "Employee"){obj = i._fields[0].properties;}
-    if(i._fields[1].labels == "Department"){obj.department = i._fields[1].properties;}
-    if(i._fields[2].label == "Employee"){obj.manager = i._fields[2].properties;}
+    if(data._fields[0] != null){
+      obj = data._fields[0].properties;
+    }
+    if(extra != null){
+      for (var i = 1; i < extra.length; i++) {
+        if(data._fields[i] != null){obj[extra[i]] = data._fields[i].properties;}
+      }
+    }
     arr.push(obj);
   });
   return arr;
@@ -57,15 +62,25 @@ function createUrl(page){
   return (server.protocol + server.ip + ":" + server.port + "/" + page);
 }
 
+//---------POPULATE MODAL---------//
+function popModel(model, form){
+  var obj = {};
+  model.forEach(function(prop) {obj[prop] = parameters[prop];});
+  return obj;
+}
+
 //---------CONVERT FORM OBJECT TO ARRAY---------//
-function formToArray(form){
-    var arr = {};
-    for(var pair of form.entries()) {arr[pair[0]] = pair[1];}
-    return arr;
+function formToObj(form, model){
+  var obj = {};
+  model.forEach(function(prop){obj[prop] = form[prop].value;});
+  return obj;
 }
 
 function searchData(value, field, arr){
-    for (var i=0; i < arr.length; i++) {
-        if (arr[i][field] === value) {return arr[i];}
-    }
+    for (var i=0; i < arr.length; i++) {if (arr[i][field] === value) {return arr[i];}}
+}
+
+function checkVar(item){
+  if (typeof item !== 'undefined') {return false;}
+  else{return true;}
 }
