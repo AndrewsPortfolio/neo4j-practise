@@ -1,6 +1,6 @@
 <div id="addEmployee" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <form id="addEmployeeForm" name="addEmployeeForm" enctype="multipart/form-data" class="modal-content">
+    <form id="addEmployeeForm" name="addEmployeeForm" enctype="multipart/form-data" class="modal-content" v-on:submit.prevent="addEmployee">
       <div class="modal-header">
         <h5 class="modal-title">Add Employee</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -110,14 +110,13 @@
         <div class="row form-group">
           <div class="col">
             <label for="e_dep">Department</label>
-            <select v-model="assignDep.department" class="dep_select form-control" name="department">
-              <option v-for="dep in departments">{{dep.name}}</option>
+            <select v-model="assignDep.department" class="dep_select form-control" name="department" placeholder="Choose Department...">
+              <option v-for="(value, index) in departments" v-bind:value="value">{{value.name}}</option>
             </select>
           </div>
         </div>
         <div class="row form-group">
           <div class="col">
-            <label for="d_desc">Description</label>
             <p>{{assignDep.department.description}}</p>
           </div>
         </div>

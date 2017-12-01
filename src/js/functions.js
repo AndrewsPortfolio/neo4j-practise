@@ -21,62 +21,23 @@ var departments, employees;
 //---------DEBUG LOGGING---------//
 function logDebug(type, text){if(showDebug){console.log(type + ' : ' + text);}}
 
-//---------SUBMITTING FORMS---------//
-function submitForm(data, page){
-  var loc = createUrl(page);
-  $.post( loc, data).done(function( data ) {
-    switch (data) {
-      case codes.success:
-        alert('record added');
-        $('#' + page + 'Form')[0].reset();
-        $('#' + page).modal('hide');
-        break;
-      case codes.inputError:
-        alert('there was an input error');
-        break;
-      case codes.dbError:
-        alert('there was an database error');
-        break;
-      case codes.unknown:
-        alert('there was an unkown error');
-        break;
-      default:
-    }
-  }).fail(function(error) {
-    alert('there was a url error');
-    console.log("error");
-  });
-}
-
-//---------GET DATA---------//
-function getData(page, type, data, trigger){
-  var loc = createUrl(page);
-  $.get( loc, data).done(function( data ) {
-    switch (data) {
-      case codes.inputError:
-        alert('there was an input error');
-        break;
-      case codes.dbError:
-        alert('there was an database error');
-        break;
-      case codes.unknown:
-        alert('there was an unkown error');
-        break;
-      default:
-      $(document).trigger('' + trigger + '', [data]);
-      return data;
-    }
-  }).fail(function(error) {
-    alert('there was a url error');
-    console.log("error");
-  });
-}
-
 //---------EXTRACT DATA---------//
 function extractSingleDataVue(data){
   arr = [];
   data.forEach(function(i) {
     arr.push(i._fields[0].properties);
+  });
+  return arr;
+}
+
+function extractEmployee(data){
+  arr = [];
+  data.forEach(function(i) {
+    var obj = {};
+    if(i._fields[0].label == "Employee"){obj = i._fields[0].properties;}
+    if(i._fields[1].labels == "Department"){obj.department = i._fields[1].properties;}
+    if(i._fields[2].label == "Employee"){obj.manager = i._fields[2].properties;}
+    arr.push(obj);
   });
   return arr;
 }
@@ -101,4 +62,10 @@ function formToArray(form){
     var arr = {};
     for(var pair of form.entries()) {arr[pair[0]] = pair[1];}
     return arr;
+}
+
+function searchData(value, field, arr){
+    for (var i=0; i < arr.length; i++) {
+        if (arr[i][field] === value) {return arr[i];}
+    }
 }

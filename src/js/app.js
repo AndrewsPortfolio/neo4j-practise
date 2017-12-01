@@ -1,9 +1,3 @@
-
-Vue.component('dep-option', {
-  template: '<option>{{ dep.name }}</option>',
-  props: ['dep']
-})
-
 var app = new Vue({
   el : '#e_controller',
   data : {
@@ -28,6 +22,7 @@ var app = new Vue({
     this.getEmployees();
   },
   methods : {
+    //get functions
     getDepartments: function(){
       this.$http.get(createUrl('departments')).then(response => {
         if(errorCheck(response)){
@@ -36,6 +31,17 @@ var app = new Vue({
       }, response => {
       }).bind(this);
     },
+    getEmployees: function(){
+      this.$http.get(createUrl('Employees')).then(response => {
+        console.log(response.body);
+        console.log(extractEmployee(response.body));
+        if(errorCheck(response)){
+          // this.employees = extractSingleDataVue(response.body);
+        }else{console.log('data error : ' + response);}
+      }, response => {
+      }).bind(this);
+    },
+    //add functions
     addDepartment: function(form){
       var data = {"name" : form.target.elements.name.value, "description" : form.target.elements.description.value};
       this.$http.post(createUrl('addDepartment'), data).then(response => {
@@ -45,13 +51,22 @@ var app = new Vue({
         }else{console.log('data error : ' + response);}
       }, response => {}).bind(this);
     },
-    getEmployees: function(){
-      this.$http.get(createUrl('Employees')).then(response => {
+    addEmployee: function(form){
+      var data = {
+        "first_name" : form.target.elements.first_name.value,
+        "surename" : form.target.elements.surename.value,
+        "email" : form.target.elements.email.value,
+        "job_title" : form.target.elements.job_title.value,
+        // "department" : form.target.elements.department.value
+        "department" : searchData(form.target.elements.department.value, 'name', this.departments)
+
+      };
+      this.$http.post(createUrl('addEmployee'), data).then(response => {
         if(errorCheck(response)){
-          this.employees = extractSingleDataVue(response.body);
+          this.employees.push(data);
+          // form.target.reset();
         }else{console.log('data error : ' + response);}
-      }, response => {
-      }).bind(this);
+      }, response => {}).bind(this);
     },
   }
 });

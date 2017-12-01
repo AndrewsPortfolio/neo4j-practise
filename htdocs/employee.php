@@ -49,8 +49,8 @@
                   <div v-else><button type="button" class="btn btn-primary">Assign Manager</button></div>
                 </td>
                 <td>
-                  <div v-if="emp.department">{{emp.department}}</div>
-                  <div v-else><button  v-on:click="e_firstName = emp.first_name" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AssignDepartment">Assign Department</button></div>
+                  <div v-if="emp.department">{{emp.department.name}}</div>
+                  <div v-else><button  v-on:click="assignDep.employee = emp" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AssignDepartment">Assign Department</button></div>
                 </td>
               </tr>
             </tbody>

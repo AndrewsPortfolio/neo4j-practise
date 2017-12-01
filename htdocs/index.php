@@ -12,7 +12,6 @@
         </div>
         <div class="row">
           <div class="col">
-            <iframe src="http://127.0.0.1:8080/addemployee"></iframe>
           </div>
           <div class="col">
           </div>
