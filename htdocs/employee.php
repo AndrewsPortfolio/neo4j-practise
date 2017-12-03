@@ -48,12 +48,12 @@
                 <td>{{emp.email}}</td>
                 <td>{{emp.job_title}}</td>
                 <td>
-                  <div v-if="emp.manager">{{emp.manager}}</div>
-                  <div v-else><button type="button" class="btn btn-primary">Assign Manager</button></div>
+                  <div v-if="emp.manager">{{emp.manager.first_name}} {{emp.manager.surename}}</div>
+                  <div v-else><button type="button" class="btn btn-primary" v-on:click="assign.m.e = index" data-toggle="modal" data-target="#AssignManager">Assign Manager</button></div>
                 </td>
                 <td>
                   <div v-if="emp.department">{{emp.department.name}}</div>
-                  <div v-else><button  v-on:click="assignDep.employee = emp" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AssignDepartment">Assign Department</button></div>
+                  <div v-else><button  v-on:click="assign.d.e = index" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AssignDepartment">Assign Department</button></div>
                 </td>
               </tr>
             </tbody>

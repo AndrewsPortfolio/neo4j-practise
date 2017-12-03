@@ -9,6 +9,7 @@
     "js":[
       "./src/js/functions.js",
       "./src/js/models.js",
+      "./src/js/components.js",
       "./src/js/app.js"
     ],
     "css":["./src/scss/*.scss"]

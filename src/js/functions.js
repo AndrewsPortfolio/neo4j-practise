@@ -38,8 +38,8 @@ function extractData(data, extra = null){
       obj = data._fields[0].properties;
     }
     if(extra != null){
-      for (var i = 1; i < extra.length; i++) {
-        if(data._fields[i] != null){obj[extra[i]] = data._fields[i].properties;}
+      for (var i = 0; i < extra.length; i++) {
+        if(data._fields[(i + 1)] != null){obj[extra[(i)]] = data._fields[(i + 1)].properties;}
       }
     }
     arr.push(obj);
@@ -78,6 +78,10 @@ function formToObj(form, model){
 
 function searchData(value, field, arr){
     for (var i=0; i < arr.length; i++) {if (arr[i][field] === value) {return arr[i];}}
+}
+
+function findData(value, field, arr){
+    for (var i=0; i < arr.length; i++) {if (arr[i][field] === value) {return i;}}
 }
 
 function checkVar(item){

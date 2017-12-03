@@ -11,36 +11,29 @@
         <div class="row form-group">
           <div class="col-6">
             <label for="e_firstName">First Name</label>
-            <input  id="e_firstName" name="first_name" type="text" class="form-control" placeholder="First Name">
+            <input name="first_name" type="text" class="form-control" placeholder="First Name">
           </div>
           <div class="col-6">
             <label for="e_surename">Surename</label>
-            <input id="e_surename" name="surename" type="text" class="form-control" placeholder="Surename">
+            <input name="surename" type="text" class="form-control" placeholder="Surename">
           </div>
         </div>
         <div class="row form-group">
           <div class="col">
             <label for="e_email">Email</label>
-            <input id="e_email" name="email" type="email" class="form-control" placeholder="email">
+            <input name="email" type="email" class="form-control" placeholder="email">
           </div>
         </div>
         <div class="row form-group">
           <div class="col">
             <label for="e_jobTitle">Job Title</label>
-            <input id="e_jobTitle" name="job_title" type="text" class="form-control" placeholder="job title">
+            <input name="job_title" type="text" class="form-control" placeholder="job title">
           </div>
         </div>
         <div class="row form-group">
           <div class="col">
             <label for="e_dep">Department</label>
-            <select class="dep_select form-control" name="department">
-              <option v-for="dep in departments">{{dep.name}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="row form-group">
-          <div class="col">
-            <small id="manager" class="form-text text-muted float-right">Assign manager ?</small>
+            <dep-select name="department" v-bind:deps="departments"></dep-select>
           </div>
         </div>
       </div>
@@ -83,7 +76,7 @@
 
 <div id="AssignDepartment" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <form id="AssignDepartment" name="AssignDepartment" v-on:submit.prevent="addDepartment" enctype="multipart/form-data" class="modal-content">
+    <form id="AssignDepartmentForm" name="AssignDepartmentForm" v-on:submit.prevent="assignDepartment" enctype="multipart/form-data" class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Assign Department</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -92,37 +85,60 @@
       </div>
       <div class="modal-body">
         <div class="row form-group">
-          <div class="col-6">
-            <label for="e_firstName">First Name</label>
-            <input  v-model="assignDep.employee.first_name" id="e_firstName" name="first_name" type="text" class="form-control" placeholder="First Name" readonly>
-          </div>
-          <div class="col-6">
-            <label for="e_surename">Surename</label>
-            <input v-model="assignDep.employee.surename" id="e_surename" name="surename" type="text" class="form-control" placeholder="Surename" readonly>
+          <div class="col">
+            <label>Name</label>
+            <input :value="fullname(assign.d.e)" type="text" class="form-control" readonly>
           </div>
         </div>
         <div class="row form-group">
           <div class="col">
-            <label for="e_email">Email</label>
-            <input v-model="assignDep.employee.email" id="e_email" name="email" type="email" class="form-control" placeholder="email" readonly>
+            <label for="e_jobTitle">Job Title</label>
+            <input v-model="getEmployee(assign.d.e).job_title" name="job_title" class="form-control" readonly>
           </div>
         </div>
         <div class="row form-group">
           <div class="col">
             <label for="e_dep">Department</label>
-            <select v-model="assignDep.department" class="dep_select form-control" name="department" placeholder="Choose Department...">
-              <option v-for="(value, index) in departments" v-bind:value="value">{{value.name}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="row form-group">
-          <div class="col">
-            <p>{{assignDep.department.description}}</p>
+            <dep-select name="department" v-bind:deps="departments"></dep-select>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary">Add Department</button>
+        <button class="btn btn-primary">Assign Department</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="AssignManager" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <form class="modal-content" name="AssignManagerForm" v-on:submit.prevent="assignManager" enctype="multipart/form-data">
+      <div class="modal-header">
+        <h5 class="modal-title">Assign Manager</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <div class="row form-group">
+          <div class="col">
+            <label>Name</label>
+            <input :value="fullname(assign.m.e)" type="text" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col">
+            <label for="e_jobTitle">Job Title</label>
+            <input :value="getEmployee(assign.m.e).job_title" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col">
+            <label for="e_dep">Manager</label>
+            <emp-select v-bind:emps="employees" v-bind:selected="assign.m.m" v-bind:set="assign.m.e" name="manager"></emp-select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary">Assign Manager</button>
       </div>
     </form>
   </div>
