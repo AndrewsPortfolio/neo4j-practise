@@ -33,7 +33,7 @@
         <div class="row form-group">
           <div class="col">
             <label for="e_dep">Department</label>
-            <dep-select name="department" v-bind:deps="departments"></dep-select>
+            <dep-select v-bind:deps="departments"></<dep-select>
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@
 
 <div id="AssignDepartment" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <form id="AssignDepartmentForm" name="AssignDepartmentForm" v-on:submit.prevent="assignDepartment" enctype="multipart/form-data" class="modal-content">
+    <form v-if="getEmployee(assign.d.e)" id="AssignDepartmentForm" name="AssignDepartmentForm" v-on:submit.prevent="assignDepartment" enctype="multipart/form-data" class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Assign Department</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -99,7 +99,7 @@
         <div class="row form-group">
           <div class="col">
             <label for="e_dep">Department</label>
-            <dep-select name="department" v-bind:deps="departments"></dep-select>
+            <dep-select v-model="assign.d.d" v-bind:deps="departments"></<dep-select>
           </div>
         </div>
       </div>
@@ -112,9 +112,9 @@
 
 <div id="AssignManager" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <form class="modal-content" name="AssignManagerForm" v-on:submit.prevent="assignManager" enctype="multipart/form-data">
+    <form v-if="getEmployee(assign.m.e)" class="modal-content" name="AssignManagerForm" v-on:submit.prevent="assignManager" enctype="multipart/form-data">
       <div class="modal-header">
-        <h5 class="modal-title">Assign Manager</h5>
+        <h5 class="modal-title">Assign Manager : </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
@@ -133,7 +133,7 @@
         <div class="row form-group">
           <div class="col">
             <label for="e_dep">Manager</label>
-            <emp-select v-bind:emps="employees" v-bind:selected="assign.m.m" v-bind:set="assign.m.e" name="manager"></emp-select>
+            <emp-select v-model="assign.m.m" :emps="employees" :set="0"></<emp-select>
           </div>
         </div>
       </div>

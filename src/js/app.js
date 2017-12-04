@@ -3,14 +3,13 @@ var app = new Vue({
   el : '#e_controller',
   //variables
   data : {
-    test : "this is a test",
+    test_app: 0,
     departments: [],
     employees: [],
     assignDep : {"e":0,"d":0},
     assign : {
       m:{"e":0,"m":0},
       d:{"e":0,"d":0}
-
     },
 
   },
@@ -25,9 +24,7 @@ var app = new Vue({
     getDepartments: function(){
       this.$http.get(createUrl('departments')).then(response => {
         if(errorCheck(response)){
-          console.log(response.body);
           this.departments = extractData(response.body, null);
-          console.log(this.departments);
         }else{console.log('data error : ' + response);}
       }, response => {
       }).bind(this);
@@ -35,9 +32,7 @@ var app = new Vue({
     getEmployees: function(){
       this.$http.get(createUrl('Employees')).then(response => {
         if(errorCheck(response)){
-          console.log(response.body);
           this.employees = extractData(response.body, this.empExtras);
-          console.log(this.employees);
         }else{console.log('data error : ' + response);}
       }, response => {
       }).bind(this);
@@ -53,8 +48,8 @@ var app = new Vue({
       }, response => {}).bind(this);
     },
     addEmployee: function(form){
-      var data = formToObj(form.target.elements, this.employeeModel);
-      data.department = this.departments[form.target.elements.department.value];
+      var data = formToObj(form.target.elements, this.employeeModel)
+      Vue.set(data, 'department', this.departments[form.target.elements.department.value])
       this.$http.post(createUrl('addEmployee'), data).then(response => {
         if(errorCheck(response)){
           this.employees.push(data);
@@ -64,19 +59,18 @@ var app = new Vue({
     },
     //assign functions
     assignDepartment: function(form){
-      var data = formToObj(form.target.elements, this.employeeModel);
-      data.department = this.departments[form.target.elements.department.value];
+      var data = this.getEmployee(this.assign.d.e);
+      Vue.set(data, 'department', this.departments[this.assign.d.d])
       this.$http.post(createUrl('assignDepartment'), data).then(response => {
         if(errorCheck(response)){
-          Vue.set( this.employees, findData(data.email, 'email', this.employees),data);
+          Vue.set(this.employees, this.assign.d.e, data);
           form.target.reset();
         }else{console.log('data error : ' + response);}
       }, response => {}).bind(this);
     },
     assignManager: function(form){
-      var data = this.getEmployee(this.assign.m.e);
-      data.manager = this.getEmployee(this.assign.m.m);
-      console.log(data);
+      var data = this.employees[this.assign.m.e];
+      Vue.set(data, 'manager', this.employees[this.assign.m.m])
       this.$http.post(createUrl('assignManager'), data).then(response => {
         if(errorCheck(response)){
           Vue.set(this.employees, this.assign.m.e, data);
@@ -89,11 +83,19 @@ var app = new Vue({
       if (typeof item !== 'undefined') {return false;}
       else{return true;}
     },
-    getEmployee: function(i){
-      return this.employees[i];
-    },
+    getEmployee: function(i){return this.employees[i];},
+    getDepartment: function(i){return this.departments[i];},
     fullname: function(i){
-      return (this.employees[i].first_name + " " + this.employees[i].surename);
+      if(this.employees[i]){
+        return (this.employees[i].first_name + " " + this.employees[i].surename);
+      }else{return '';}
+    },
+    test: function(){
+      console.log("assignManager");
+      console.log("emp : " + this.assign.m.e);
+      console.log("mgr : " + this.assign.m.m);
+      console.log("test");
+      console.log("test_app : " + this.test_app);
     }
   }
 });

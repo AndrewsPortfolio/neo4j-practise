@@ -19,10 +19,25 @@
           <div class="col">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDepartment">Add Department</button>
           </div>
+          <div class="col">
+            <button type="button" class="btn btn-danger" @click="test">console</button>
+          </div>
         </div>
       </div>
     </section>
     <section>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1>Tests</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <!--test-->
+          </div>
+        </div>
+      </div>
       <div class="container">
         <div class="row">
           <div class="col">
@@ -41,7 +56,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(emp, index) in employees">
+              <tr v-for="(emp, index) in employees" v-if="emp">
                 <th scope="row">{{index}}</th>
                 <td>{{emp.first_name}}</td>
                 <td>{{emp.surename}}</td>
