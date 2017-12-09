@@ -1,24 +1,70 @@
 <!doctype html>
-<html lang="en">
-
-<head>
-  <title>NEO4J CONNECT</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="css/bundle.min.css">
-  <link rel="stylesheet" href="css/main.css">
-</head>
-
-<body>
-  <article class="jumbotron">
-    <h1 class="display-3">NEO4J web applications</h1>
-    <p class="lead">This is a simple set of examples I have learnt to connect the neo4j graph database to websites</p>
-  </article>
-  <main class="container">
-    <section class="jumbotron">
-
+<html>
+<?php require 'inc/head.php';?>
+<body class="">
+  <?php require 'inc/nav.php';?>
+  <main id="f_controller" class="fluid-container">
+    <section class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <div class="row">
+          <h1 class="display-3">Employees</h1>
+        </div>
+        <div class="row">
+          <p class="lead">this example uses employees and departments as well as managers.</p>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEmployee">Add Employee</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDepartment">Add Department</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-danger" @click="test">console</button>
+          </div>
+        </div>
+      </div>
     </section>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1>Tests</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <!--test-->
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1>Teams</h1>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Location</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(team, index) in teams" v-if="teams">
+                <th scope="row">{{index}}</th>
+                <td>{{team.name}}</td>
+                <td>{{team.location}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <?php require 'inc/football/modals.php';?>
   </main>
-  <script src="js/bundle.min.js"></script>
+  <?php require 'inc/footer.php';?>
+  <?php require 'inc/scripts.php';?>
 </body>
 </html>

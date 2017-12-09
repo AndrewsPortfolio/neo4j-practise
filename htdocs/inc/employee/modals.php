@@ -76,7 +76,7 @@
 
 <div id="AssignDepartment" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <form v-if="getEmployee(assign.d.e)" id="AssignDepartmentForm" name="AssignDepartmentForm" v-on:submit.prevent="assignDepartment" enctype="multipart/form-data" class="modal-content">
+    <form v-if="employees[assign.d.e]" id="AssignDepartmentForm" name="AssignDepartmentForm" v-on:submit.prevent="assignDepartment" enctype="multipart/form-data" class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Assign Department</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -87,13 +87,13 @@
         <div class="row form-group">
           <div class="col">
             <label>Name</label>
-            <input :value="fullname(assign.d.e)" type="text" class="form-control" readonly>
+            <input :value="fullname(employees[assign.d.e])" type="text" class="form-control" readonly>
           </div>
         </div>
         <div class="row form-group">
           <div class="col">
             <label for="e_jobTitle">Job Title</label>
-            <input v-model="getEmployee(assign.d.e).job_title" name="job_title" class="form-control" readonly>
+            <input v-model="employees[assign.d.e].job_title" name="job_title" class="form-control" readonly>
           </div>
         </div>
         <div class="row form-group">
@@ -112,7 +112,7 @@
 
 <div id="AssignManager" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <form v-if="getEmployee(assign.m.e)" class="modal-content" name="AssignManagerForm" v-on:submit.prevent="assignManager" enctype="multipart/form-data">
+    <form v-if="employees[assign.m.e]" class="modal-content" name="AssignManagerForm" v-on:submit.prevent="assignManager" enctype="multipart/form-data">
       <div class="modal-header">
         <h5 class="modal-title">Assign Manager : </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -121,13 +121,13 @@
         <div class="row form-group">
           <div class="col">
             <label>Name</label>
-            <input :value="fullname(assign.m.e)" type="text" class="form-control" readonly>
+            <input :value="fullname(employees[assign.m.e])" type="text" class="form-control" readonly>
           </div>
         </div>
         <div class="row form-group">
           <div class="col">
             <label for="e_jobTitle">Job Title</label>
-            <input :value="getEmployee(assign.m.e).job_title" class="form-control" readonly>
+            <input :value="employees[assign.m.e].job_title" class="form-control" readonly>
           </div>
         </div>
         <div class="row form-group">

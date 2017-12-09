@@ -128,7 +128,7 @@ Vue.component('dep-select', {
     deps: {type: Array},
     value: {type: Number},
   },
-  template: '<select class="form-control" v-bind:value="value" v-on:change="updateValue($event.target.value)"><option v-for="(dep, i) in deps" v-bind:value="i">{{dep.name}}</option></select>',
+  template: '<select name="department" class="form-control" v-bind:value="value" v-on:change="updateValue($event.target.value)"><option v-for="(dep, i) in deps" v-bind:value="i">{{dep.name}}</option></select>',
   methods: {
     updateValue: function (value) {
       this.$emit('input', Number(value))
@@ -142,7 +142,7 @@ Vue.component('emp-select', {
     value: {type: Number},
     set: {type: Number},
   },
-  template: '<select class="form-control" ref="input" v-bind:value="value" v-on:change="updateValue($event.target.value)"><option v-for="(emp, i) in emps" v-if="i != set" v-bind:value="i">{{emp.first_name}} {{emp.surename}}</option></select>',
+  template: '<select name="employee" class="form-control" ref="input" v-bind:value="value" v-on:change="updateValue($event.target.value)"><option v-for="(emp, i) in emps" v-if="i != set" v-bind:value="i">{{emp.first_name}} {{emp.surename}}</option></select>',
   methods: {
     updateValue: function (value) {
       this.$emit('input', Number(value))
@@ -150,7 +150,21 @@ Vue.component('emp-select', {
   }
 });
 
-var app = new Vue({
+Vue.component('team-select', {
+  props: {
+    teams: {type: Array},
+    value: {type: Number},
+    set: {type: Number},
+  },
+  template: '<select name="team" class="form-control" ref="input" v-bind:value="value" v-on:change="updateValue($event.target.value)"><option v-for="(emp, i) in emps" v-if="i != set" v-bind:value="i">{{emp.first_name}} {{emp.surename}}</option></select>',
+  methods: {
+    updateValue: function (value) {
+      this.$emit('input', Number(value))
+    }
+  }
+});
+
+var employee = new Vue({
   //options
   el : '#e_controller',
   //variables
@@ -235,8 +249,68 @@ var app = new Vue({
       if (typeof item !== 'undefined') {return false;}
       else{return true;}
     },
-    getEmployee: function(i){return this.employees[i];},
-    getDepartment: function(i){return this.departments[i];},
+    fullname: function(i){
+      if(this.employees[i]){
+        return (this.employees[i].first_name + " " + this.employees[i].surename);
+      }else{return '';}
+    },
+    test: function(){
+      console.log("assignManager");
+      console.log("emp : " + this.assign.m.e);
+      console.log("mgr : " + this.assign.m.m);
+      console.log("test");
+      console.log("test_app : " + this.test_app);
+    }
+  }
+});
+
+//football
+
+var football = new Vue({
+  //options
+  el : '#e_controller',
+  //variables
+  data : {
+    test_app: 0,
+    departments: [],
+    matches: [],
+    createMatch : {
+      h:{"t":0,"s":0},
+      a:{"t":0,"s":0}
+    },
+
+  },
+  //constructor
+  created : function(){
+    this.getTeams();
+  },
+  //functions
+  methods : {
+    //get functions
+
+    getTeams: function(){
+      this.$http.get(createUrl('Teams')).then(response => {
+        if(errorCheck(response)){
+          this.teams = extractData(response.body);
+        }else{console.log('data error : ' + response);}
+      }, response => {
+      }).bind(this);
+    },
+    //add functions
+    addTeam: function(form){
+      var data = {"name" : form.target.elements.name.value, "description" : form.target.elements.description.value};
+      this.$http.post(createUrl('addDepartment'), data).then(response => {
+        if(errorCheck(response)){
+          this.departments.push(data);
+          form.target.reset();
+        }else{console.log('data error : ' + response);}
+      }, response => {}).bind(this);
+    },
+    //other functions
+    checkVar: function(item){
+      if (typeof item !== 'undefined') {return false;}
+      else{return true;}
+    },
     fullname: function(i){
       if(this.employees[i]){
         return (this.employees[i].first_name + " " + this.employees[i].surename);
