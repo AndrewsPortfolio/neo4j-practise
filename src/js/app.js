@@ -102,7 +102,7 @@ var employee = new Vue({
 
 var football = new Vue({
   //options
-  el : '#e_controller',
+  el : '#f_controller',
   //variables
   data : {
     test_app: 0,

@@ -121,19 +121,19 @@
         <div class="row form-group">
           <div class="col">
             <label>Name</label>
-            <input :value="fullname(employees[assign.m.e])" type="text" class="form-control" readonly>
+            <input :value="employees[assign.m.e].first_name" type="text" class="form-control" readonly>
           </div>
         </div>
         <div class="row form-group">
           <div class="col">
             <label for="e_jobTitle">Job Title</label>
-            <input :value="employees[assign.m.e].job_title" class="form-control" readonly>
+            <input v-bind:value="employees[assign.m.e].job_title" class="form-control" readonly>
           </div>
         </div>
         <div class="row form-group">
           <div class="col">
             <label for="e_dep">Manager</label>
-            <emp-select v-model="assign.m.m" :emps="employees" :set="0"></<emp-select>
+            <emp-select v-model="assign.m.m" :emps="employees" :set="assign.m.e"></<emp-select>
           </div>
         </div>
       </div>
